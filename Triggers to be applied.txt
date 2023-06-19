@@ -1,0 +1,10 @@
+delimiter //
+create trigger reduce_no_of_flats
+after insert on sales
+for each row
+begin
+update properties
+set flat_available=flat_available-1
+where id=new.property_id;
+end //
+delimiter ;

@@ -1,0 +1,61 @@
+delimiter $$
+create procedure MakeDeal(in my_client_id int)
+begin
+  declare mybudget decimal(10,2);
+  declare mybedroom int;
+  declare mylocation varchar(15);
+  declare myproperty_id int;
+  declare myagent_id int;
+  declare mysale_price decimal(10,2);
+  declare mclient_id int;
+
+
+  select id, budget,preffer_no_bedroom ,preffer_location into mclient_id,mybudget,mybedroom,mylocation
+  from clients
+  where id=my_client_id;
+
+  select id,agent_id,price into myproperty_id,myagent_id,mysale_price
+  from properties
+  where price<=mybudget and no_of_bedrooms=mybedroom and region_id=(select id from regions where region_name=mylocation);
+  
+  insert into sales(property_id,client_id,agent_id,sale_price,sale_date)
+  values(myproperty_id,mclient_id,myagent_id,mysale_price,curdate());
+end $$
+delimiter ;
+
+call MakeDeal(1);
+
+
+
+
+#############################################################################
+
+Procedure to Retrieve Properties by Agent ID:
+
+DELIMITER //
+CREATE PROCEDURE GetClientsByLocation(IN location VARCHAR(15))
+BEGIN
+  SELECT * FROM clients WHERE preffer_location = location;
+END //
+DELIMITER ;
+
+ call GetClientsByLocation('wakad');
+
+#############################################################################
+
+Procedure to Update Property Price:
+
+DELIMITER //
+CREATE PROCEDURE UpdatePropertyPrice(
+  IN propertyId INT,
+  IN newPrice DECIMAL(10,2)
+)
+BEGIN
+  UPDATE properties SET price = newPrice WHERE id = propertyId;
+END //
+DELIMITER ;
+
+call UpdatePropertyPrice(1,490000);
+
+#################################################################################
+

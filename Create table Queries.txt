@@ -1,0 +1,98 @@
+create database limitless;
+use limitless;
+
+create table clients
+(
+  id int auto_increment primary key,
+  client_first_name varchar(20),
+  client_last_name varchar(20),
+  client_email varchar(30),
+  client_contact int,
+  preffer_location varchar(15),
+  preffer_no_bedroom int,
+  budget decimal(10,2) 
+);
+
+
+create table regions
+(
+ id int auto_increment primary key,
+ region_name varchar(15)
+);
+
+ 
+
+create table cities
+(
+ id int auto_increment primary key,
+ city_name varchar(15)
+);
+
+
+
+create table addresses
+(
+ id int auto_increment,
+ city_id int,
+ region_id int,
+ 
+constraint pk_address_id primary key(id),
+constraint fk_city_id foreign key(city_id) references cities(id),
+constraint fk_region_id foreign key(region_id) references regions(id) 
+);
+
+
+create table agents
+(
+id int auto_increment primary key,
+agent_first_name varchar(10),
+agent_last_name varchar(10),
+agent_email varchar(30),
+agent_contact int,
+agent_location int,
+constraint fk_agent_location foreign key(agent_location) references regions(id)
+);
+
+
+create table properties
+(
+ id int auto_increment primary key,
+ property_name varchar(30),
+ price decimal(10,2),
+ no_of_bedrooms int,
+ flat_available int,
+carpet_area int,
+amenities varchar(100),
+agent_id int,
+city_id int,
+ region_id int,
+constraint fk_agent_id foreign key(agent_id) references agents(id),
+constraint fk_city_id1 foreign key(city_id) references cities(id),
+constraint fk_region_id1 foreign key(region_id) references regions(id)
+);
+
+
+create table sales
+(
+   id int auto_increment primary key,
+   property_id int,
+   client_id int,
+   
+   agent_id int,
+   sale_price decimal(10,2),
+   sale_date date,
+   constraint fk_property_id foreign key(property_id) references properties(id),
+   constraint fk_client_id foreign key(client_id) references clients(id),
+   constraint fk_agent_id1 foreign key(agent_id) references agents(id)
+);
+
+create table admins
+(
+  id int auto_increment primary key,
+  admin_first_name varchar(10),
+  admin_last_name varchar(10),
+  admin_email varchar(20),
+  admin_login_id int,
+  admin_password varchar(10)
+);
+

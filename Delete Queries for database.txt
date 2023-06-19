@@ -1,0 +1,10 @@
+
+delete from admins;
+delete from sales;
+delete from clients;
+delete from properties;
+delete from agents;
+delete from addresses;
+delete from cities;
+delete from regions;
+

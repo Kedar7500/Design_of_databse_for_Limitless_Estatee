@@ -1,0 +1,93 @@
+regions
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| id          | int         | NO   | PRI | NULL    | auto_increment |
+| region_name | varchar(15) | YES  |     | NULL    |                |
++-------------+-------------+------+-----+---------+----------------+
+
+cities
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int         | NO   | PRI | NULL    | auto_increment |
+| city_name | varchar(15) | YES  |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+
+addresses
++-----------+------+------+-----+---------+----------------+
+| Field     | Type | Null | Key | Default | Extra          |
++-----------+------+------+-----+---------+----------------+
+| id        | int  | NO   | PRI | NULL    | auto_increment |
+| city_id   | int  | YES  | MUL | NULL    |                |
+| region_id | int  | YES  | MUL | NULL    |                |
++-----------+------+------+-----+---------+----------------+
+
+
+clients
++--------------------+---------------+------+-----+---------+----------------+
+| Field              | Type          | Null | Key | Default | Extra          |
++--------------------+---------------+------+-----+---------+----------------+
+| id                 | int           | NO   | PRI | NULL    | auto_increment |
+| client_first_name  | varchar(20)   | YES  |     | NULL    |                |
+| client_last_name   | varchar(20)   | YES  |     | NULL    |                |
+| client_email       | varchar(30)   | YES  |     | NULL    |                |
+| client_contact     | int           | YES  |     | NULL    |                |
+| preffer_location   | varchar(15)   | YES  |     | NULL    |                |
+| preffer_no_bedroom | int           | YES  |     | NULL    |                |
+| budget             | decimal(10,2) | YES  |     | NULL    |                |
++--------------------+---------------+------+-----+---------+----------------+
+
+agents
++------------------+-------------+------+-----+---------+----------------+
+| Field            | Type        | Null | Key | Default | Extra          |
++------------------+-------------+------+-----+---------+----------------+
+| id               | int         | NO   | PRI | NULL    | auto_increment |
+| agent_first_name | varchar(10) | YES  |     | NULL    |                |
+| agent_last_name  | varchar(10) | YES  |     | NULL    |                |
+| agent_email      | varchar(30) | YES  |     | NULL    |                |
+| agent_contact    | int         | YES  |     | NULL    |                |
+| agent_location   | int         | YES  | MUL | NULL    |                |
++------------------+-------------+------+-----+---------+----------------+
+
+properties
++----------------+---------------+------+-----+---------+----------------+
+| Field          | Type          | Null | Key | Default | Extra          |
++----------------+---------------+------+-----+---------+----------------+
+| id             | int           | NO   | PRI | NULL    | auto_increment |
+| property_name  | varchar(30)   | YES  |     | NULL    |                |
+| price          | decimal(10,2) | YES  |     | NULL    |                |
+| no_of_bedrooms | int           | YES  |     | NULL    |                |
+| flat_available | int           | YES  |     | NULL    |                |
+| carpet_area    | int           | YES  |     | NULL    |                |
+| amenities      | varchar(100)  | YES  |     | NULL    |                |
+| agent_id       | int           | YES  | MUL | NULL    |                |
+| city_id        | int           | YES  | MUL | NULL    |                |
+| region_id      | int           | YES  | MUL | NULL    |                |
++----------------+---------------+------+-----+---------+----------------+
+
+sales
+
++-------------+---------------+------+-----+---------+----------------+
+| Field       | Type          | Null | Key | Default | Extra          |
++-------------+---------------+------+-----+---------+----------------+
+| id          | int           | NO   | PRI | NULL    | auto_increment |
+| property_id | int           | YES  | MUL | NULL    |                |
+| client_id   | int           | YES  | MUL | NULL    |                |
+| agent_id    | int           | YES  | MUL | NULL    |                |
+| sale_price  | decimal(10,2) | YES  |     | NULL    |                |
+| sale_date   | date          | YES  |     | NULL    |                |
++-------------+---------------+------+-----+---------+----------------+
+
+admins
+
++------------------+-------------+------+-----+---------+----------------+
+| Field            | Type        | Null | Key | Default | Extra          |
++------------------+-------------+------+-----+---------+----------------+
+| id               | int         | NO   | PRI | NULL    | auto_increment |
+| admin_first_name | varchar(10) | YES  |     | NULL    |                |
+| admin_last_name  | varchar(10) | YES  |     | NULL    |                |
+| admin_email      | varchar(20) | YES  |     | NULL    |                |
+| admin_login_id   | int         | YES  |     | NULL    |                |
+| admin_password   | varchar(10) | YES  |     | NULL    |                |
++------------------+-------------+------+-----+---------+----------------+
